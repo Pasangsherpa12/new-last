@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2083 | To My Gorgeous Sister</title>
+    
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Montserrat:wght@200;500&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --rose-gold: #b76e79;
+            --petal-pink: #ffc2d1;
+            --deep-love: #800f2f;
+            --glass: rgba(255, 255, 255, 0.15);
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            background: #0a0a0a; /* Dark sleek base */
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* 3D Canvas Background */
+        #canvas-container {
+            position: fixed; top: 0; left: 0; z-index: -1;
+            background: radial-gradient(circle at center, #1a050a 0%, #000 100%);
+        }
+
+        /* Initial Entry Gate */
+        #gate {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 10000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: 1.5s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+
+        .hologram-btn {
+            padding: 20px 50px;
+            background: transparent;
+            color: var(--petal-pink);
+            border: 1px solid var(--petal-pink);
+            font-family: 'Marcellus', serif;
+            font-size: 1.2rem;
+            cursor: pointer;
+            letter-spacing: 5px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(255, 194, 209, 0.2);
+        }
+
+        .hologram-btn:hover {
+            background: var(--petal-pink);
+            color: black;
+            box-shadow: 0 0 40px var(--petal-pink);
+        }
+
+        /* Hidden YouTube Audio */
+        #yt-audio-element { position: absolute; top: -1000px; }
+
+        /* Scroll Sections */
+        section {
+            height: 100vh;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            padding: 20px; text-align: center;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            padding: 50px; border-radius: 100px 10px 100px 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            max-width: 600px;
+            transform: scale(0.9); opacity: 0;
+            transition: 1s ease-out;
+        }
+
+        .active .glass-card { transform: scale(1); opacity: 1; }
+
+        /* Rounded Image frame */
+        .photo-aura {
+            position: relative;
+            width: 260px; height: 260px;
+            margin-bottom: 30px;
+        }
+
+        .round-img {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--petal-pink);
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .aura-ring {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            border-radius: 50%;
+            border: 2px dashed var(--rose-gold);
+            animation: rotateAura 15s linear infinite;
+        }
+
+        @keyframes rotateAura { from {transform: rotate(0deg);} to {transform: rotate(360deg);} }
+
+        /* Typography */
+        h1 { font-family: 'Dancing Script', cursive; font-size: 4rem; margin: 10px 0; color: var(--petal-pink); }
+        h2 { font-family: 'Marcellus', serif; font-size: 1rem; letter-spacing: 8px; color: var(--rose-gold); text-transform: uppercase; }
+        p { font-size: 1.1rem; font-weight: 200; color: #ccc; }
+
+        /* Bouquet Modal */
+        #bouquet-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: none; justify-content: center; align-items: center;
+            z-index: 20000;
+        }
+
+        .bouquet-reveal {
+            font-size: 10rem; filter: drop-shadow(0 0 30px var(--petal-pink));
+            animation: bloom 2s ease-out;
+        }
+
+        @keyframes bloom { from {transform: scale(0);} to {transform: scale(1);} }
+
+        .scroll-down {
+            position: absolute; bottom: 30px;
+            color: var(--petal-pink); font-size: 0.7rem;
+            letter-spacing: 3px; animation: blink 2s infinite;
+        }
+
+        @keyframes blink { 0%, 100% {opacity: 0.3;} 50% {opacity: 1;} }
+
+    </style>
+</head>
+<body>
+
+    <!-- START GATE -->
+    <div id="gate">
+        <button class="hologram-btn" onclick="initExperience()">INITIALIZE 2083</button>
+        <p style="margin-top: 20px; font-size: 0.7rem; letter-spacing: 3px;">BROTHER TO SISTER TRANSMISSION</p>
+    </div>
+
+    <!-- Hidden YT Player -->
+    <div id="yt-audio-element"></div>
+
+    <div id="canvas-container"></div>
+
+    <!-- 1. GORGEOUS -->
+    <section class="scroll-sec active">
+        <div class="glass-card">
+            <h2>Hologram 01</h2>
+            <h1>Gorgeous.</h1>
+            <p>Entering the new year 2083 with your brilliance.</p>
+        </div>
+        <div class="scroll-down">SCROLL DOWN</div>
+    </section>
+
+    <!-- 2. COLLEGE HEAD -->
+    <section class="scroll-sec">
+        <div class="photo-aura">
+            <div class="aura-ring"></div>
+            <!-- ROUND IMAGE HERE -->
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400" alt="Sister" class="round-img">
+        </div>
+        <div class="glass-card">
+            <h2>Class 12 | Head</h2>
+            <h1>Natural Leader</h1>
+            <p>Kind, cute, and commanding respect effortlessly.</p>
+        </div>
+    </section>
+
+    <!-- 3. SUCCESS WISH -->
+    <section class="scroll-sec">
+        <div class="glass-card">
+            <h2>The Mission</h2>
+            <h1>Best of Luck</h1>
+            <p>Go and conquer your exams. <br> The future is already yours.</p>
+        </div>
+    </section>
+
+    <!-- 4. FUTURE -->
+    <section class="scroll-sec">
+        <div class="glass-card">
+            <h2>Destination</h2>
+            <h1>Future Success</h1>
+            <p>From a brother from another mother,<br>Wishing you an legendary career.</p>
+        </div>
+    </section>
+
+    <!-- 5. BOUQUET -->
+    <section class="scroll-sec">
+        <div class="glass-card">
+            <h2>Final Page</h2>
+            <h1>2083 Love</h1>
+            <button class="hologram-btn" style="padding: 10px 30px; font-size: 0.8rem;" onclick="showBouquet()">REVEAL GIFT</button>
+        </div>
+    </section>
+
+    <!-- BOUQUET OVERLAY -->
+    <div id="bouquet-overlay" onclick="this.style.display='none'">
+        <div style="text-align: center;">
+            <div class="bouquet-reveal">💐</div>
+            <h1 style="font-size: 2rem;">A 2083 Digital Bouquet</h1>
+            <p>For the best sister in the universe.</p>
+        </div>
+    </div>
+
+    <script>
+        // --- YOUTUBE API ---
+        let player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('yt-audio-element', {
+                height: '0', width: '0',
+                videoId: 'k_O2a3uRshY', // REPLACE WITH YOUR VIDEO ID
+                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': 'k_O2a3uRshY' }
+            });
+        }
+
+        function initExperience() {
+            if (player && player.playVideo) player.playVideo();
+            document.getElementById('gate').style.transform = 'translateY(-100%)';
+            init3D();
+        }
+
+        function showBouquet() {
+            document.getElementById('bouquet-overlay').style.display = 'flex';
+        }
+
+        // --- SCROLL OBSERVER ---
+        const sections = document.querySelectorAll('.scroll-sec');
+        window.addEventListener('scroll', () => {
+            sections.forEach(sec => {
+                const rect = sec.getBoundingClientRect();
+                if(rect.top < window.innerHeight * 0.5 && rect.bottom > window.innerHeight * 0.5) {
+                    sec.classList.add('active');
+                } else {
+                    sec.classList.remove('active');
+                }
+            });
+        });
+
+        // --- 3D HEART NEBULA ---
+        function init3D() {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+            const heartShape = new THREE.Shape();
+            heartShape.moveTo(0, 0);
+            heartShape.bezierCurveTo(0, -1, -2, -1, -2, 0);
+            heartShape.bezierCurveTo(-2, 1.5, 0, 3, 0, 4);
+            heartShape.bezierCurveTo(0, 3, 2, 1.5, 2, 0);
+            heartShape.bezierCurveTo(2, -1, 0, -1, 0, 0);
+
+            const geometry = new THREE.ShapeGeometry(heartShape);
+            const hearts = [];
+            
+            for(let i=0; i<150; i++) {
+                const mat = new THREE.MeshBasicMaterial({ 
+                    color: i % 2 === 0 ? 0xffc2d1 : 0xb76e79, 
+                    transparent: true, 
+                    opacity: Math.random() * 0.5 
+                });
+                const mesh = new THREE.Mesh(geometry, mat);
+                mesh.position.set((Math.random()-0.5)*50, (Math.random()-0.5)*50, (Math.random()-0.5)*30);
+                mesh.rotation.x = Math.PI;
+                mesh.scale.set(0.1, 0.1, 0.1);
+                scene.add(mesh);
+                hearts.push(mesh);
+            }
+
+            camera.position.z = 20;
+
+            function animate() {
+                requestAnimationFrame(animate);
+                hearts.forEach(h => {
+                    h.position.y += 0.02;
+                    h.rotation.z += 0.005;
+                    if(h.position.y > 25) h.position.y = -25;
+                });
+                renderer.render(scene, camera);
+            }
+            animate();
+        }
+    </script>
+</body>
+</html>
